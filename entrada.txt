@@ -1,0 +1,8 @@
+mientras ( a > b ) {
+    f=f+1;
+}
+si ( e != n ) {
+    a += r ;
+}
+
+cadena = 
