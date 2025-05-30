@@ -1,2 +1,2 @@
-Proyecto Analizador Léxico en Python 
+## Proyecto Analizador Léxico en Python 
 Autor: André Flores
