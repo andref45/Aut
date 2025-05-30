@@ -25,11 +25,11 @@ class Lexer:
         self.separadores = {"(", ")", "{", "}", ";", ","}
         
         # Construir expresión regular para tokens
+        # IMPORTANTE: El orden importa - los operadores más largos deben ir primero
         self.token_specs = [
-            ('COMENTARIO', r'//.*'),  # Comentarios de una línea
             ('NUMERO', r'\d+(\.\d+)?'),  # Números enteros o decimales
-            ('ASIGNACION', r'(\+=|-=|\*=|/=|=)'),  # Operadores de asignación
-            ('LOGICO', r'(&&|\|\||!|==|>=|<=|>|<|!=)'),  # Operadores lógicos
+            ('LOGICO', r'(&&|\|\||==|!=|>=|<=|>|<|!)'),  # Operadores lógicos (PRIMERO)
+            ('ASIGNACION', r'(\+=|-=|\*=|/=|=)'),  # Operadores de asignación (DESPUÉS)
             ('MATEMATICO', r'[\+\-\*/]'),  # Operadores matemáticos
             ('SEPARADOR', r'[\(\)\{\};,]'),  # Separadores
             ('ID', r'[a-zA-Z_][a-zA-Z0-9_]*'),  # Identificadores
@@ -58,8 +58,8 @@ class Lexer:
             else:
                 columna += len(valor)
             
-            # Ignorar espacios y comentarios
-            if tipo == 'ESPACIO' or tipo == 'COMENTARIO':
+            # Ignorar espacios
+            if tipo == 'ESPACIO':
                 continue
             
             # Determinar el tipo exacto del token
